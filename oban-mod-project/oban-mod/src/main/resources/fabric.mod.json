@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "obanmod",
+  "version": "${version}",
+  "name": "ㅇ 금지 모드",
+  "description": "마이크로 말한 문장에 ㅇ(초성/받침)이 들어가면 사망합니다.",
+  "environment": "*",
+  "entrypoints": {
+    "voicechat": ["com.example.obanmod.OBanVoicePlugin"]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "voicechat": "*"
+  }
+}

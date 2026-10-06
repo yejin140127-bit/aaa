@@ -1,0 +1,29 @@
+plugins {
+    id 'fabric-loom' version '1.6-SNAPSHOT'
+}
+
+version = project.mod_version
+group = "com.example"
+base { archivesName = "oban-mod" }
+
+repositories {
+    maven { url = "https://maven.maxhenkel.de/repository/public" }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    // Simple Voice Chat API (컴파일용)
+    compileOnly "de.maxhenkel.voicechat:voicechat-api:2.5.0"
+
+    // Vosk 음성 인식 (모드 jar 안에 포함, JNA는 마인크래프트 것 사용)
+    implementation("com.alphacephei:vosk:0.3.45") { exclude group: "net.java.dev.jna" }
+    include("com.alphacephei:vosk:0.3.45")
+}
+
+tasks.withType(JavaCompile).configureEach { options.release = 17 }
+java { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
+processResources { inputs.property "version", project.version; filesMatching("fabric.mod.json") { expand "version": project.version } }
